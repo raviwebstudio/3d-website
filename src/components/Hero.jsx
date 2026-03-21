@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import lens from '../assets/lens.png'
-import grip from '../assets/grip.png'
+import grip from '../assets/lens.png'
 import body from '../assets/body.png'
+import lens from '../assets/grip.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -206,23 +206,25 @@ export default function Hero() {
             }`}
             key={currentStage}
           >
-            {currentStage === 0 ? (
-              <h1 className="hero-h1">{stage.headline}</h1>
-            ) : (
-              <h2 className="hero-h2">{stage.headline}</h2>
-            )}
+            <div className="hero-text-inner">
+              {currentStage === 0 ? (
+                <h1 className="hero-h1">{stage.headline}</h1>
+              ) : (
+                <h2 className="hero-h2">{stage.headline}</h2>
+              )}
 
-            {stage.subline && <p className="hero-sub">{stage.subline}</p>}
+              {stage.subline && <p className="hero-sub">{stage.subline}</p>}
 
-            {stage.cta && (
-              <button
-                type="button"
-                className="hero-cta"
-                onClick={scrollToContact}
-              >
-                Start a Project
-              </button>
-            )}
+              {stage.cta && (
+                <button
+                  type="button"
+                  className="hero-cta"
+                  onClick={scrollToContact}
+                >
+                  Start a Project
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
