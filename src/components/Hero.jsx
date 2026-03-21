@@ -1,12 +1,44 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
 import lens from '../assets/lens.png'
 import grip from '../assets/grip.png'
 import body from '../assets/body.png'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const stages = [
+  {
+    headline: 'BROTHERS FILMS PRODUCTION',
+    subline: 'A Complete Shooting HUB',
+    position: 'centre',
+    cta: false,
+  },
+  {
+    headline: 'We Build Experiences',
+    subline: 'Not just websites',
+    position: 'right',
+    cta: false,
+  },
+  {
+    headline: 'Brands That Have Outgrown Templates',
+    subline: 'This is where they come',
+    position: 'left',
+    cta: false,
+  },
+  {
+    headline: 'From Concept to Camera',
+    subline: 'Every pixel. Every frame. Intentional.',
+    position: 'right',
+    cta: false,
+  },
+  {
+    headline: "Let's Build Something Extraordinary",
+    subline: '',
+    position: 'centre',
+    cta: true,
+  },
+]
 
 function scrollToContact() {
   const target = document.getElementById('contact')
@@ -21,104 +53,178 @@ function scrollToContact() {
 
 export default function Hero() {
   const heroRef = useRef(null)
+  const [currentStage, setCurrentStage] = useState(0)
 
-  useGSAP(
-    () => {
-      const refreshOnLoad = () => ScrollTrigger.refresh()
+  useEffect(() => {
+    const stageTriggers = []
+    const refreshOnLoad = () => ScrollTrigger.refresh()
 
+    const ctx = gsap.context(() => {
+      const stageDistance = () => window.innerHeight
+      const pulseCamera = (scaleValue = 1.06) => {
+        gsap.to('.camera-group', {
+          scale: scaleValue,
+          duration: 0.5,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          onComplete: () => {
+            gsap.to('.camera-group', {
+              scale: 1,
+              duration: 0.4,
+              ease: 'power2.inOut',
+              overwrite: 'auto',
+            })
+          },
+        })
+      }
+
+      const resetCamera = () => {
+        gsap.to('.camera-group', {
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        })
+      }
+
+      const createStageTrigger = (index, onEnter, onLeaveBack) => {
+        const trigger = ScrollTrigger.create({
+          trigger: heroRef.current,
+          start: () => `top+=${stageDistance() * index} top`,
+          end: () => `top+=${stageDistance() * (index + 1)} top`,
+          invalidateOnRefresh: true,
+          onEnter,
+          onLeaveBack,
+        })
+
+        stageTriggers.push(trigger)
+      }
+
+      // Initial states: only lens is visible.
       gsap.set('.grip-image', { x: '-120vw', opacity: 0 })
       gsap.set('.body-image', { x: '120vw', opacity: 0 })
-      gsap.set(['.text-s1', '.text-s2', '.text-s3', '.text-s4'], {
-        opacity: 0,
-        y: 20,
-      })
+      gsap.set('.camera-group', { scale: 1 })
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.hero-section',
-          start: 'top top',
-          end: '+=500%',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
+      createStageTrigger(
+        1,
+        () => {
+          setCurrentStage(1)
+          gsap.to('.grip-image', {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          })
         },
-      })
+        () => {
+          setCurrentStage(0)
+          gsap.to('.grip-image', {
+            x: '-120vw',
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.in',
+            overwrite: 'auto',
+          })
+        },
+      )
 
-      timeline
-        .to('.text-s0', { opacity: 0, duration: 0.25 }, 0)
-        .to(
-          '.grip-image',
-          { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
-          0.25,
-        )
-        .to('.text-s1', { opacity: 1, y: 0, duration: 0.4 }, 0.7)
-        .to('.text-s1', { opacity: 0, duration: 0.25 }, 1.1)
-        .to(
-          '.body-image',
-          { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out' },
-          1.4,
-        )
-        .to('.text-s2', { opacity: 1, y: 0, duration: 0.4 }, 1.8)
-        .to('.text-s2', { opacity: 0, duration: 0.25 }, 2.1)
-        .to('.camera-group', { scale: 1.04, duration: 0.5, ease: 'power2.out' }, 2.4)
-        .to('.text-s3', { opacity: 1, y: 0, duration: 0.4 }, 2.8)
-        .to('.text-s3', { opacity: 0, duration: 0.25 }, 3.1)
-        .to('.text-s2', { opacity: 0, duration: 0.1 }, 3.1)
-        .to('.text-s1', { opacity: 0, duration: 0.1 }, 3.1)
-        .to('.text-s0', { opacity: 0, duration: 0.1 }, 3.1)
-        .to('.camera-group', { scale: 1, duration: 0.3 }, 3.3)
-        .to('.text-s4', { opacity: 1, y: 0, duration: 0.4 }, 3.5)
+      createStageTrigger(
+        2,
+        () => {
+          setCurrentStage(2)
+          gsap.to('.body-image', {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          })
+        },
+        () => {
+          setCurrentStage(1)
+          gsap.to('.body-image', {
+            x: '120vw',
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.in',
+            overwrite: 'auto',
+          })
+        },
+      )
 
-      window.addEventListener('load', refreshOnLoad)
+      createStageTrigger(
+        3,
+        () => {
+          setCurrentStage(3)
+          pulseCamera(1.06)
+        },
+        () => {
+          setCurrentStage(2)
+          resetCamera()
+        },
+      )
 
-      return () => {
-        window.removeEventListener('load', refreshOnLoad)
-        timeline.scrollTrigger?.kill()
-        timeline.kill()
-      }
-    },
-    { scope: heroRef },
-  )
+      createStageTrigger(
+        4,
+        () => {
+          setCurrentStage(4)
+          pulseCamera(1.03)
+        },
+        () => {
+          setCurrentStage(3)
+        },
+      )
+    }, heroRef)
+
+    window.addEventListener('load', refreshOnLoad)
+
+    return () => {
+      window.removeEventListener('load', refreshOnLoad)
+      stageTriggers.forEach((trigger) => trigger.kill())
+      ctx.revert()
+    }
+  }, [])
+
+  const stage = stages[currentStage]
 
   return (
     <section ref={heroRef} className="hero-section" id="work">
-      <div className="hero-glow" />
+      <div className="hero-sticky-wrapper">
+        <div className="hero-sticky">
+          <div className="hero-glow" />
 
-      <div className="camera-group">
-        <img src={lens} alt="" className="camera-img lens-image" />
-        <img src={grip} alt="" className="camera-img grip-image" />
-        <img src={body} alt="" className="camera-img body-image" />
-      </div>
+          <div className="camera-group">
+            <img src={lens} alt="" className="camera-img lens-image" />
+            <img src={grip} alt="" className="camera-img grip-image" />
+            <img src={body} alt="" className="camera-img body-image" />
+          </div>
 
-      <div className="hero-text text-s0 pos-centre">
-        <h1 className="hero-h1">BROTHERS FILMS PRODUCTION</h1>
-        <p className="hero-sub">A Complete Shooting HUB</p>
-      </div>
+          <div
+            className={`hero-text-block pos-${stage.position} ${
+              currentStage === 4 ? 'pos-below' : ''
+            }`}
+            key={currentStage}
+          >
+            {currentStage === 0 ? (
+              <h1 className="hero-h1">{stage.headline}</h1>
+            ) : (
+              <h2 className="hero-h2">{stage.headline}</h2>
+            )}
 
-      <div className="hero-text text-s1 pos-right">
-        <h2 className="hero-h2">We Build Experiences</h2>
-        <p className="hero-sub">Not just websites</p>
-      </div>
+            {stage.subline && <p className="hero-sub">{stage.subline}</p>}
 
-      <div className="hero-text text-s2 pos-left">
-        <h2 className="hero-h2">
-          Brands That Have
-          <br />
-          Outgrown Templates
-        </h2>
-        <p className="hero-sub">This is where they come</p>
-      </div>
-
-      <div className="hero-text text-s3 pos-right">
-        <h2 className="hero-h2">From Concept to Camera</h2>
-        <p className="hero-sub">Every pixel. Every frame. Intentional.</p>
-      </div>
-
-      <div className="hero-text text-s4 pos-centre pos-below">
-        <h2 className="hero-h2">Let's Build Something Extraordinary</h2>
-        <button type="button" className="hero-cta" onClick={scrollToContact}>
-          Start a Project
-        </button>
+            {stage.cta && (
+              <button
+                type="button"
+                className="hero-cta"
+                onClick={scrollToContact}
+              >
+                Start a Project
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   )
