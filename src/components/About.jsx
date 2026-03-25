@@ -1,10 +1,9 @@
-const imageUrl =
-  'https://images.unsplash.com/photo-1556103255-4443dbae8e5a?w=800'
+import aboutImage from '../assets/images/about-us.webp'
 
 const stats = [
   ['500+', 'Projects'],
   ['8+', 'Years'],
-  ['200+', 'Clients'],
+  ['250+', 'Clients'],
 ]
 
 export default function About() {
@@ -19,10 +18,7 @@ export default function About() {
             We Craft Stories.
           </h2>
           <p className="about-body">
-            Brothers Films Production is New Delhi's premium photography and
-            filmmaking studio. From brand campaigns to wedding films, every
-            project is built on one belief - visuals should make people feel
-            something.
+            Brothers Films Production is Meerut's premium photography   and filmmaking studio. From brand campaigns to wedding films, every project is built on one belief - visuals should make people feel something.
           </p>
 
           <div className="about-stats">
@@ -36,7 +32,7 @@ export default function About() {
         </div>
 
         <div className="about-right">
-          <img src={imageUrl} alt="Brothers Films Studio" className="about-img" />
+          <img src={aboutImage} alt="Brothers Films Studio" className="about-img" />
         </div>
       </div>
     </section>

@@ -1,11 +1,59 @@
-const poster =
-  'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600'
+import { useEffect, useRef, useState } from 'react'
+import posterImage from '../assets/images/hero-main.jpg'
 
 export default function VideoSection() {
+  const videoRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(true)
+
+  useEffect(() => {
+    const video = videoRef.current
+
+    if (!video) {
+      return
+    }
+
+    const playVideo = async () => {
+      try {
+        await video.play()
+        setIsPlaying(true)
+      } catch {
+        setIsPlaying(false)
+      }
+    }
+
+    playVideo()
+  }, [])
+
+  const togglePlayback = async () => {
+    const video = videoRef.current
+
+    if (!video) {
+      return
+    }
+
+    if (video.paused) {
+      await video.play()
+      setIsPlaying(true)
+      return
+    }
+
+    video.pause()
+    setIsPlaying(false)
+  }
+
   return (
     <section className="video-section">
-      <video autoPlay muted loop playsInline poster={poster} className="video-bg">
-        <source src="" type="video/mp4" />
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={posterImage}
+        className="video-bg"
+      >
+        <source src="/videos/showreel.mp4" type="video/mp4" />
       </video>
 
       <div className="video-overlay" />
@@ -17,8 +65,13 @@ export default function VideoSection() {
           <br />
           a Purpose
         </h2>
-        <button type="button" className="play-btn" aria-label="Play showreel">
-          ▶
+        <button
+          type="button"
+          className="play-btn"
+          aria-label={isPlaying ? 'Pause showreel' : 'Play showreel'}
+          onClick={togglePlayback}
+        >
+          {isPlaying ? '||' : '>'}
         </button>
       </div>
     </section>

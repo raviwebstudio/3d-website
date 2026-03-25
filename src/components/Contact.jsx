@@ -1,8 +1,8 @@
-const details = ['New Delhi, India', 'hello@brothersfilms.in', '+91 98XXX XXXXX']
+const details = ['Meerut, Delhi, Gurgaon', 'contact@brothersfilms.in', '+91 8595217287']
 const socials = [
-  { label: 'Instagram', href: 'https://instagram.com' },
-  { label: 'Behance', href: 'https://behance.net' },
-  { label: 'YouTube', href: 'https://youtube.com' },
+  { label: 'WhatsApp', href: 'https://wa.me/918595217287' },
+  { label: 'Instagram', href: 'https://instagram.com/brothersfilmsproduction' },
+  { label: 'YouTube', href: 'https://youtube.com/@brothers_films_production' },
 ]
 
 const projectTypes = [

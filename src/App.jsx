@@ -6,6 +6,7 @@ import Portfolio from './components/Portfolio'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Contact from './components/Contact'
+import CallCTA from './components/CallCTA'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Testimonials />
         <CTA />
         <Contact />
+        <CallCTA />
       </main>
       <Footer />
     </>

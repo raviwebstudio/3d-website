@@ -188,14 +188,14 @@ export default function Testimonials() {
       </div>
 
       <div className="t-verified">
-        <span>Verified reviews from Google Business Profile</span>
+        <span className='text-white'>Verified reviews from Google Business Profile</span>
         <a
           href={googleReviewsUrl}
           className="g-view-all"
           target="_blank"
           rel="noreferrer"
         >
-          View on Google
+          View on Google 
         </a>
       </div>
     </section>

@@ -1,38 +1,44 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import portfolio1 from '../assets/images/portfolio1.webp'
+import portfolio2 from '../assets/images/portfolio2.webp'
+import portfolio3 from '../assets/images/0S5A0627.webp'
+import portfolio4 from '../assets/images/0S5A0659.webp'
+import portfolio5 from '../assets/images/0S5A0742.webp'
+import portfolio6 from '../assets/images/0S5A1002.webp'
 
 const projects = [
   {
-    img: 'https://images.unsplash.com/photo-1551803091-e20673f15770?w=1200',
-    title: 'Brand Campaign',
-    client: 'Nykaa',
+    img: portfolio1,
+    title: 'Cinematic Photography',
+    client: 'Shivani Chaudhary',
     category: 'PHOTOGRAPHY',
   },
   {
-    img: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=1200',
+    img: portfolio2,
     title: 'Wedding Film',
-    client: 'Oberoi Hotel',
-    category: 'VIDEOGRAPHY',
+    client: 'Gaurav Chaudhary',
+    category: 'PHOTOGRAPHY',
   },
   {
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200',
+    img: portfolio3,
     title: 'Product Shoot',
     client: 'Tanishq',
     category: 'PHOTOGRAPHY',
   },
   {
-    img: 'https://images.unsplash.com/photo-1476503121207-9f7c7b3c8571?w=1200',
+    img: portfolio4,
     title: 'Corporate Film',
     client: 'HDFC Bank',
     category: 'BRAND FILM',
   },
   {
-    img: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200',
+    img: portfolio5,
     title: 'Wedding',
     client: 'ITC Grand',
     category: 'WEDDING FILM',
   },
   {
-    img: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200',
+    img: portfolio6,
     title: 'Editorial',
     client: 'Vogue India',
     category: 'EDITORIAL',
@@ -43,9 +49,56 @@ export default function Portfolio() {
   const sliderRef = useRef(null)
   const dragRef = useRef({
     isDown: false,
+    isPaused: false,
     startX: 0,
     scrollLeft: 0,
   })
+
+  useEffect(() => {
+    const slider = sliderRef.current
+
+    if (!slider) {
+      return undefined
+    }
+
+    const getStepSize = () => {
+      const firstCard = slider.querySelector('.portfolio-card')
+
+      if (!firstCard) {
+        return 0
+      }
+
+      const { gap } = window.getComputedStyle(slider)
+      return firstCard.getBoundingClientRect().width + Number.parseFloat(gap || '0')
+    }
+
+    const autoSlide = window.setInterval(() => {
+      if (dragRef.current.isDown || dragRef.current.isPaused) {
+        return
+      }
+
+      const step = getStepSize()
+
+      if (!step) {
+        return
+      }
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth
+      const nextLeft =
+        slider.scrollLeft + step >= maxScroll - step * 0.2
+          ? 0
+          : slider.scrollLeft + step
+
+      slider.scrollTo({
+        left: nextLeft,
+        behavior: 'smooth',
+      })
+    }, 3500)
+
+    return () => {
+      window.clearInterval(autoSlide)
+    }
+  }, [])
 
   const handlePointerDown = (event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) {
@@ -87,16 +140,24 @@ export default function Portfolio() {
   }
 
   return (
-    <section className="portfolio-section" id="services">
+    <section className="portfolio-section" id="portfolio">
+      <div id="services" className="section-anchor" aria-hidden="true" />
       <div className="portfolio-header">
         <span className="section-label">OUR PORTFOLIO</span>
         <h2 className="section-headline">Work That Speaks</h2>
-        <p className="portfolio-drag-hint">Drag to explore</p>
+        {/* <p className="portfolio-drag-hint">Drag to explore.</p> */}
       </div>
 
       <div
         ref={sliderRef}
         className="portfolio-slider"
+        onMouseEnter={() => {
+          dragRef.current.isPaused = true
+        }}
+        onMouseLeave={() => {
+          dragRef.current.isPaused = false
+          stopDragging()
+        }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={stopDragging}

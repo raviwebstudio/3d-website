@@ -1,12 +1,12 @@
-import logo from '../assets/logo.png'
+import logo from '../assets/images/logo.png'
 
 const columns = [
   {
-    label: 'STUDIO',
+    label: 'CONTACT',
     links: [
-      { label: 'New Delhi, India', href: '#contact' },
-      { label: 'hello@brothersfilms.in', href: 'mailto:hello@brothersfilms.in' },
-      { label: '+91 98XXX XXXXX', href: 'tel:+9198XXXXXXX' },
+      { label: '+91 8595217287 ', href: 'tel:+91 8595217287 ' },
+      { label: 'Meerut, Delhi, Gurgaon', href: '#contact' },
+      { label: 'Contact@brothersfilms.in', href: 'mailto:Contact@brothersfilms.in' },
     ],
   },
   {
@@ -14,24 +14,24 @@ const columns = [
     links: [
       { label: 'Photography', href: '#services' },
       { label: 'Videography', href: '#services' },
-      { label: 'Brand Films', href: '#services' },
       { label: 'Wedding Films', href: '#services' },
+      { label: 'Brand Films', href: '#services' },
     ],
   },
   {
     label: 'SERVICES',
     links: [
       { label: 'Web Experiences', href: '#services' },
-      { label: 'Campaign Strategy', href: '#services' },
       { label: 'Brand Identity', href: '#services' },
+      { label: 'Campaign Strategy', href: '#services' },
     ],
   },
   {
     label: 'FOLLOW',
     links: [
-      { label: 'Instagram', href: 'https://instagram.com' },
-      { label: 'Behance', href: 'https://behance.net' },
-      { label: 'YouTube', href: 'https://youtube.com' },
+      { label: 'WhatsApp', href: 'https://wa.me/918595217287' },
+      { label: 'Instagram', href: 'https://instagram.com/brothersfilmsproduction' },
+      { label: 'YouTube', href: 'https://youtube.com/@brothersfilmsproduction' },
     ],
   },
 ]
@@ -70,7 +70,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span>© 2026 Brothers Films Production. All rights reserved.</span>
-        <span>Made with precision in New Delhi</span>
+        <span>Made by The Digital Wings</span>
       </div>
     </footer>
   )

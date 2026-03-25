@@ -33,7 +33,7 @@ export default function CTA() {
         <button
           type="button"
           className="btn-outline"
-          onClick={() => scrollToSection('work')}
+          onClick={() => scrollToSection('portfolio')}
         >
           View Our Work
         </button>

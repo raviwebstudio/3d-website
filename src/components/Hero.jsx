@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import grip from '../assets/lens.png'
-import body from '../assets/body.png'
-import lens from '../assets/grip.png'
+import grip from '../assets/images/lens.png'
+import body from '../assets/images/body.png'
+import lens from '../assets/images/grip.png'
 
 gsap.registerPlugin(ScrollTrigger)
 
