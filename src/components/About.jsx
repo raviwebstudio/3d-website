@@ -30,7 +30,7 @@ export default function About() {
 
         <div className="about-right">
           <div className="img-placeholder about-img" style={{ background: '#1a1a1a' }}>
-            <img src="./src/assets/images/about.webp" alt="about-img" />
+            <img src="../src/assets/images/about.webp" alt="about-img" />
           </div>
         </div>
       </div>
