@@ -9,7 +9,7 @@ const reviews = [
   {
     text: 'Professional, creative, and very friendly team. They made us feel comfortable throughout the shoot and delivered stunning results.',
     name: 'Aakash Upadhyay',
-    time: '10 days ago',
+    time: '1 month ago',
     rating: 5,
     initials: 'AU',
     color: '#7B5EA7',
@@ -17,7 +17,7 @@ const reviews = [
   {
     text: 'They gave helpful directions during the shoot and made sure we were comfortable. The final pictures looked clean and well edited.',
     name: 'Raima Paul',
-    time: '1 month ago',
+    time: '2 month ago',
     rating: 5,
     initials: 'RP',
     color: '#4A90D9',
@@ -25,7 +25,7 @@ const reviews = [
   {
     text: "Good service and nice results. The pictures came out clear and natural, just what I wanted. Overall, I'm happy with the service.",
     name: 'Kshitiz Gupta',
-    time: '1 month ago',
+    time: '2 month ago',
     rating: 5,
     initials: 'KG',
     color: '#2ECC71',
@@ -196,7 +196,7 @@ export default function Testimonials() {
           target="_blank"
           rel="noreferrer"
         >
-          View on Google 
+          View on Google
         </a>
       </div>
     </section>
