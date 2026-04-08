@@ -42,7 +42,7 @@ export default function VideoSection() {
   }
 
   return (
-    <section className="video-section">
+    <section className="video-section" id="services">
       <video
         ref={videoRef}
         autoPlay
@@ -52,7 +52,7 @@ export default function VideoSection() {
         preload="auto"
         className="video-bg"
       >
-        <source src="/video/showreel.mp4" type="video/mp4" />
+        <source src="/video/showreel-01.mp4" type="video/mp4" />
       </video>
 
       <div className="video-overlay" />

@@ -4,7 +4,6 @@ import About from './components/About'
 import Philosophy from './components/Philosophy'   // NEW
 import Marquee from './components/Marquee'      // NEW
 import VideoSection from './components/VideoSection'
-import Services from './components/Services'     // NEW
 import Portfolio from './components/Portfolio'    // REPLACED
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
@@ -23,7 +22,6 @@ export default function App() {
         <Philosophy />
         <Portfolio />
         <CTA />
-        <Services />
         <Testimonials />
         <Contact />
       </main>

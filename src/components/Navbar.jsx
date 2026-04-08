@@ -10,14 +10,11 @@ const links = [
 ]
 
 function scrollToSection(id) {
-  const target = document.getElementById(id)
-
-  if (!target) {
+  if (id === 'home') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     return
   }
-
-  const top = target.getBoundingClientRect().top + window.scrollY - 80
-  window.scrollTo({ top, behavior: 'smooth' })
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
 export default function Navbar() {
@@ -54,9 +51,9 @@ export default function Navbar() {
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <a
-        href="#work"
+        href="#home"
         className="navbar-brand"
-        onClick={(event) => handleNavClick(event, 'work')}
+        onClick={(event) => handleNavClick(event, 'home')}
       >
         <img
           src={logo}

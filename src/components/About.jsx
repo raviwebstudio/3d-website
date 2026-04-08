@@ -1,4 +1,5 @@
 // Replacing old stats array with direct map inside render
+import aboutImg from '../assets/images/about.webp';
 
 export default function About() {
   return (
@@ -30,7 +31,7 @@ export default function About() {
 
         <div className="about-right">
           <div className="img-placeholder about-img" style={{ background: '#1a1a1a' }}>
-            <img src="../src/assets/images/about.webp" alt="about-img" />
+            <img src={aboutImg} alt="about-img" />
           </div>
         </div>
       </div>

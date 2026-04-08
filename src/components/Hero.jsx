@@ -200,7 +200,7 @@ export default function Hero() {
   const stage = stages[currentStage]
 
   return (
-    <section ref={heroRef} className="hero-section" id="work">
+    <section ref={heroRef} className="hero-section" id="home">
       <div className="hero-sticky-wrapper">
         <div className="hero-sticky">
           {/* <div className="hero-scroll-counter">{scrollCount}</div> */}

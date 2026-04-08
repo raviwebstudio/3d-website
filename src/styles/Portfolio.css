@@ -10,6 +10,11 @@
   margin-bottom: 56px;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  color: #FFFFFF;
+}
+
 /* Outer container — clips overflow */
 .slider-outer {
   width: 100%;
@@ -48,7 +53,7 @@
 /* Individual card */
 .slider-card {
   flex: 0 0 600px;
-  height: 640px;
+  height: 610px;
   position: relative;
   border-radius: 3px;
   vertical-align: top;
