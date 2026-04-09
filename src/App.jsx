@@ -70,10 +70,10 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <About />
         <Marquee />
-        <HorizontalScroll />
+        <About />
         <PremiumVideoFeature />
+        <HorizontalScroll />
         <Portfolio />
         <PremiumText />
         <Philosophy />
