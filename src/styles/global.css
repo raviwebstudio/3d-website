@@ -136,8 +136,6 @@ section[id] {
 
 .navbar.scrolled {
   background: rgba(8, 8, 10, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .navbar-brand {
@@ -319,14 +317,14 @@ section[id] {
 }
 
 .pos-right {
-  right: 5vw;
+  right: 6.5vw;
   top: 50%;
   transform: translateY(-50%);
   text-align: left;
 }
 
 .pos-left {
-  left: 8vw;
+  left: 10vw;
   top: 50%;
   transform: translateY(-50%);
   text-align: left;

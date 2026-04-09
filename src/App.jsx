@@ -16,15 +16,15 @@ import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import CustomCursor from './components/CustomCursor'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   useEffect(() => {
-    // 1. Smooth Scroll (Lenis)
+    // 1. Smooth Scroll (Lenis) with precise friction
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.08, // Advanced Netflix-style friction
       smoothWheel: true,
       wheelMultiplier: 1,
     })
@@ -35,7 +35,28 @@ export default function App() {
     }
     requestAnimationFrame(raf)
 
-    lenis.on('scroll', ScrollTrigger.update)
+    lenis.on('scroll', (e) => {
+      ScrollTrigger.update()
+
+      // Advanced Scroll Velocity FX
+      const velocity = Math.abs(e.velocity)
+      if (velocity > 3) {
+        gsap.to('main img:not(.camera-img), main video', {
+          scale: 1 + Math.min(velocity * 0.008, 0.06),
+          duration: 0.3,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        })
+      } else {
+        gsap.to('main img:not(.camera-img), main video', {
+          scale: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+      }
+    })
+
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000)
     })
@@ -49,8 +70,8 @@ export default function App() {
         {
           y: 0,
           opacity: 1,
-          duration: 1.2,
-          ease: 'power3.out',
+          duration: 1.5,
+          ease: 'power4.out',
           scrollTrigger: {
             trigger: sec,
             start: 'top 80%',
@@ -67,15 +88,16 @@ export default function App() {
 
   return (
     <>
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
         <Marquee />
         <About />
+        <PremiumText />
         <PremiumVideoFeature />
         <HorizontalScroll />
         <Portfolio />
-        <PremiumText />
         <Philosophy />
         <CTA />
         <Testimonials />

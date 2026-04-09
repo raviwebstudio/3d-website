@@ -44,16 +44,75 @@ export default function Philosophy() {
         <h2 className="section-headline">How We Think.<br />How We Work.</h2>
       </div>
       <div className="philosophy-grid">
-        {pillars.map((p, i) => (
-          <div key={i} className="philosophy-card">
-            <div className="philosophy-card-top">
-              <span className="philosophy-icon">{p.icon}</span>
-              <span className="philosophy-keyword">{p.keyword}</span>
+        {pillars.map((p, i) => {
+          const cardRef = useRef(null)
+          const lightRef = useRef(null)
+
+          const handleMouseMove = (e) => {
+            const card = cardRef.current
+            const light = lightRef.current
+            if (!card) return
+            const rect = card.getBoundingClientRect()
+            const x = e.clientX - rect.left
+            const y = e.clientY - rect.top
+            
+            const centerX = rect.width / 2
+            const centerY = rect.height / 2
+            const rotateX = ((y - centerY) / centerY) * -5 // MAX 5 DEG
+            const rotateY = ((x - centerX) / centerX) * 5
+            
+            gsap.to(card, {
+              rotateX,
+              rotateY,
+              scale: 1.05,
+              z: 50,
+              duration: 0.5,
+              ease: 'power2.out',
+              transformPerspective: 1000,
+            })
+            
+            gsap.to(light, {
+              x, y,
+              opacity: 1,
+              duration: 0.1
+            })
+          }
+
+          const handleMouseLeave = () => {
+            const card = cardRef.current
+            const light = lightRef.current
+            gsap.to(card, {
+              rotateX: 0,
+              rotateY: 0,
+              scale: 1,
+              z: 0,
+              duration: 0.5,
+              ease: 'power3.out'
+            })
+            gsap.to(light, { opacity: 0, duration: 0.5 })
+          }
+
+          return (
+            <div 
+              key={i} 
+              ref={cardRef}
+              className="philosophy-card cursor-pointer"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div 
+                ref={lightRef} 
+                className="absolute w-64 h-64 bg-white/10 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2 opacity-0 z-0" 
+              />
+              <div className="relative z-10 philosophy-card-top">
+                <span className="philosophy-icon">{p.icon}</span>
+                <span className="philosophy-keyword">{p.keyword}</span>
+              </div>
+              <h3 className="relative z-10 philosophy-title">{p.title}</h3>
+              <p className="relative z-10 philosophy-body">{p.body}</p>
             </div>
-            <h3 className="philosophy-title">{p.title}</h3>
-            <p className="philosophy-body">{p.body}</p>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

@@ -101,14 +101,18 @@ export default function Hero() {
         stageTriggers.push(trigger)
       }
 
-      // Hero Entry Animation (fade in + slight zoom)
-      gsap.fromTo(heroRef.current,
-        { opacity: 0, scale: 1.05 },
-        { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' }
+      // Hero Entry Animation (Netflix style)
+      gsap.fromTo('.hero-section',
+        { opacity: 0 },
+        { opacity: 1, duration: 1, ease: 'power2.out' }
+      )
+      gsap.fromTo('.camera-group',
+        { scale: 1.2, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2.2, ease: 'power3.out' }
       )
       gsap.fromTo('.hero-text-block',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.5, delay: 0.8, ease: 'power3.out' }
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 1.8, delay: 0.8, ease: 'power3.out' }
       )
 
       // Initial states: only lens is visible.
@@ -212,6 +216,7 @@ export default function Hero() {
   return (
     <section ref={heroRef} className="hero-section" id="home">
       <div className="hero-sticky-wrapper">
+        <div className="film-grain"></div>
         <div className="hero-sticky">
           {/* <div className="hero-scroll-counter">{scrollCount}</div> */}
           <div className="scroll-indicator">
