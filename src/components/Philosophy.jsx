@@ -1,4 +1,9 @@
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Philosophy.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const pillars = [
   { keyword: 'VISION', icon: '◎', title: 'Before the Lens', body: "We don't pick up the camera first. We define the story, the emotion, and the message before a single frame is shot. Every project starts with intent." },
@@ -8,8 +13,30 @@ const pillars = [
 ]
 
 export default function Philosophy() {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.fromTo('.philosophy-card',
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: '.philosophy-grid',
+            start: 'top 85%'
+          }
+        }
+      )
+    }, containerRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="philosophy-section">
+    <section ref={containerRef} className="philosophy-section">
       <div className="philosophy-glow-left" />
       <div className="philosophy-glow-right" />
       <div className="philosophy-header">
@@ -31,3 +58,4 @@ export default function Philosophy() {
     </section>
   )
 }
+

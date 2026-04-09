@@ -57,7 +57,7 @@ const reviews = [
 ]
 
 const googleReviewsUrl =
-  'https://www.google.com/search?q=Brothers+Films+Production'
+  'https://www.google.com/search?sca_esv=e8481ae40804fa8e&sxsrf=ANbL-n6AYrws17fdng7_rCYR5-QoFiZOSg:1775748046179&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdq_N5EZr2-12qUmEAooigiv8kySMDMMpkCs9z-YgUXQ7VwQj6JAAo1jO8d9JWTJXrYKx6rVYhIJW5z2IA_eG-ccHC-ATNgCf_OoUFzgO3ybwypUKg%3D%3D&q=Brothers+Films+Production+Reviews&sa=X&ved=2ahUKEwjw34L8iOGTAxXKJhAIHUxlPHMQ0bkNegQIMxAH&biw=1358&bih=682&dpr=1'
 
 function Stars({ count = 5 }) {
   return (
@@ -145,14 +145,14 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <a
+          {/* <a
             href={googleReviewsUrl}
             className="g-view-link"
             target="_blank"
             rel="noreferrer"
           >
             View on Google
-          </a>
+          </a> */}
         </div>
       </div>
 

@@ -101,6 +101,16 @@ export default function Hero() {
         stageTriggers.push(trigger)
       }
 
+      // Hero Entry Animation (fade in + slight zoom)
+      gsap.fromTo(heroRef.current,
+        { opacity: 0, scale: 1.05 },
+        { opacity: 1, scale: 1, duration: 2, ease: 'power3.out' }
+      )
+      gsap.fromTo('.hero-text-block',
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1.5, delay: 0.8, ease: 'power3.out' }
+      )
+
       // Initial states: only lens is visible.
       gsap.set('.grip-image', { x: '-120vw', opacity: 0 })
       gsap.set('.body-image', { x: '120vw', opacity: 0 })

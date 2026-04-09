@@ -6,7 +6,7 @@ import '../styles/Portfolio.css'
 import p1 from '../assets/images/portfolio1.webp'
 import p2 from '../assets/images/portfolio2.webp'
 import p3 from '../assets/images/product.webp'
-import p4 from '../assets/images/bridal.webp'
+import p4 from '../assets/images/Featured02.webp'
 import p5 from '../assets/images/portfolio5.webp'
 import p6 from '../assets/images/portfolio3.webp'
 
